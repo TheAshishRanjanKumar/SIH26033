@@ -1,108 +1,108 @@
-# AgriDirect — SIH26033
+# 🌾 AgriDirect
+> **Empowering Farmers, Connecting Consumers, Revolutionizing the Agricultural Supply Chain.**
 
-**Smart India Hackathon 2026 — Internal Hackathon Documentation**
+[![SIH 2026](https://img.shields.io/badge/SIH-2026-orange)](https://sih.gov.in/sih2026PS)
+[![PS Number](https://img.shields.io/badge/PS%20Number-SIH26033-blue)]()
+[![Status](https://img.shields.io/badge/Status-Hackathon%20MVP-yellow)]()
 
-> **Problem Statement:** SIH26033 — Multiple intermediaries reduce farmers' earnings and increase consumer prices.
+*A Smart India Hackathon 2026 Project (Problem Statement SIH26033) for the Department of Consumer Affairs (DoCA).*
 
-## 1. Problem Alignment
+---
 
-The official problem statement requires a digital marketplace that:
-- connects farmers/FPOs directly with consumers and bulk buyers;
-- provides logistics support;
-- uses AI for demand forecasting and route optimization.
+## 📖 The Vision
 
-Expected benefits are better prices for farmers, lower prices for consumers, and reduced supply-chain inefficiencies.
+**The Problem:** The current agricultural supply chain is highly fragmented. Multiple intermediaries (middlemen) create a massive gap between what consumers pay and what farmers actually earn. This leads to supply chain inefficiencies, artificial price inflation, and reduced income for the very people growing our food.
 
-## 2. Product Vision
+**The AgriDirect Solution:** We are building a unified digital marketplace that bridges this gap. By connecting farmers and Farmer Producer Organizations (FPOs) directly with consumers and bulk buyers, AgriDirect ensures fairer prices, fresher produce, and a transparent agricultural ecosystem.
 
-AgriDirect is an AI-assisted farm-to-market marketplace designed to demonstrate how farmers/FPOs can discover buyers directly, aggregate supply, fulfill orders efficiently, and use demand intelligence to plan sales and logistics.
+### 🎯 Who Benefits?
+- 🧑‍🌾 **Farmers & FPOs:** Gain direct market access, fair price discovery, and visibility into market demand *before* harvest.
+- 🛒 **Consumers & Bulk Buyers:** Enjoy fresher produce, lower and more transparent prices, and reliable delivery.
+- 🏛️ **Government & Policymakers:** Access real-time market intelligence to monitor price trends, prevent volatility, and support the "Doubling Farmers' Income" initiative.
 
-## 3. Core Demo
+---
 
-The complete demo should show:
+## ✨ How It Works (The Core Flow)
+AgriDirect streamlines the entire farm-to-table process. Here is how our platform operates:
 
 ```text
-Farmer/FPO
-   ↓
-Produce Listing
-   ↓
-Buyer / Consumer Discovery
-   ↓
-Bulk RFQ / Direct Order
-   ↓
-Supply Matching & Aggregation
-   ↓
-AI Demand Forecast
-   ↓
-Route Optimization
-   ↓
-Delivery
-   ↓
-Settlement & Impact Dashboard
+🧑‍🌾 Farmer/FPO 
+   ↓ 1. Lists Produce
+🛒 Marketplace 
+   ↓ 2. Buyer Discovers & Requests Bulk Quote (RFQ)
+🤝 Supply Matching & Aggregation
+   ↓ 3. AI Predicts Demand & Optimal Pricing
+🚚 Route Optimization (AI-Driven Logistics)
+   ↓ 4. Delivery & Live Tracking
+💳 Settlement & Impact Dashboard (Showing Savings/Earnings)
 ```
 
-## 4. Hackathon MVP
+---
 
-### Must work
-1. Authentication and roles
-2. Farmer/FPO onboarding
-3. Produce listing
-4. Marketplace search/filter
-5. Bulk buyer RFQ
-6. Farmer/FPO offer matching
-7. Order creation and status lifecycle
-8. Demand forecasting
-9. Route optimization
-10. Basic shipment tracking
-11. Farmer earnings and buyer savings/impact view
+## 🛠️ Hackathon MVP Scope
 
-### Prototype / simulated
-- Payment settlement
-- KYC verification
-- External logistics integration
-- SMS/WhatsApp
-- Live GPS
-- Government data integrations
+To deliver a high-quality prototype for SIH 2026, we are focusing on the most impactful core features:
 
-### Out of scope
-- Owning physical warehouses/cold-chain infrastructure
-- Government subsidy disbursement
-- International/export marketplace
-- Crop insurance and crop-loan integrations
+### ✅ Core Features (Must Work)
+1. **Farmer & Buyer Onboarding:** Secure authentication and role-based dashboards.
+2. **Produce Listing & Marketplace Search:** Advanced filtering by crop, price, and location.
+3. **Bulk Buyer RFQ & Matching:** Allow bulk buyers to request quotes and match with Farmer/FPO offers.
+4. **Order Management:** Full lifecycle tracking from creation to delivery.
+5. **AI Demand Forecasting:** Predict regional demand using historical and external data.
+6. **Smart Route Optimization:** Cost-effective and efficient delivery paths.
+7. **Impact Dashboards:** Real-time view of farmer earnings and buyer savings.
 
-## 5. Recommended Stack
+### 🚧 Simulated Features (For Prototype)
+*Payment settlement, KYC verification, live GPS tracking, and SMS/WhatsApp notifications will be simulated for the hackathon demo.*
 
+*(Note: Physical warehouses, government subsidies, and international exports are explicitly out of scope for this MVP.)*
+
+---
+
+## 💻 Technical Overview
+
+AgriDirect uses a **modular monolith** approach tailored for rapid hackathon development while maintaining production-grade technologies.
+
+### Recommended Stack
 | Layer | Choice |
-|---|---|
-| Web | Next.js + TypeScript + Tailwind CSS |
-| Backend | Python FastAPI |
-| Database | PostgreSQL + PostGIS |
-| Cache | Redis |
-| AI/ML | Python, Pandas, NumPy, scikit-learn/XGBoost |
-| Route Optimization | Google OR-Tools |
-| Maps | OpenStreetMap + OSRM |
-| Auth | JWT + OTP abstraction |
-| Testing | pytest + frontend component tests |
-| Dev | Docker Compose + GitHub |
+| :--- | :--- |
+| **Frontend (Web)** | Next.js + TypeScript + Tailwind CSS |
+| **Backend API** | Python FastAPI |
+| **Database** | PostgreSQL + PostGIS |
+| **Caching** | Redis |
+| **AI / ML** | Python, Pandas, NumPy, scikit-learn / XGBoost |
+| **Route Optimization**| Google OR-Tools |
+| **Maps & Routing** | OpenStreetMap + OSRM |
+| **DevOps** | Docker Compose + GitHub |
 
-Use a **modular monolith** for the hackathon rather than a production microservice architecture.
+---
 
-## 6. Documentation
+## 📚 Comprehensive Documentation
 
-- `docs/PRD.md` — product requirements and scope
-- `docs/ARCHITECTURE.md` — technical architecture
-- `docs/API_DOCUMENTATION.md` — API contract
-- `docs/DATABASE_SCHEMA.md` — database design
-- `docs/AI_ML.md` — forecasting and ML plan
-- `docs/LOGISTICS.md` — matching and route optimization
-- `docs/UI_UX.md` — screens and interaction requirements
-- `docs/SECURITY.md` — security requirements
-- `docs/TESTING.md` — testing strategy
-- `docs/DEMO_SCRIPT.md` — final presentation/demo flow
-- `docs/TEAM_PLAN.md` — team responsibilities
-- `docs/CONTRIBUTING.md` — Git workflow
-- `docs/MVP_SCOPE.md` — scope control
+Dive deeper into our architecture, data models, and product planning. All documentation is stored in the `docs/` directory:
 
-## 7. Source of Truth
+### Product & Design
+- 📝 [Product Requirements (PRD)](./docs/PRD.md)
+- 🎯 [MVP Scope Control](./docs/MVP_SCOPE.md)
+- 🎨 [UI/UX & Screens](./docs/UI_UX.md)
+- 🎬 [Final Demo Script](./docs/DEMO_SCRIPT.md)
 
-The official PS defines the core problem and expected solution. Product features, architecture, technology choices, and implementation details in this repository are the team's proposed design decisions for the internal hackathon prototype.
+### Engineering & Architecture
+- 🏗️ [System Architecture](./docs/ARCHITECTURE.md)
+- 🔌 [API Documentation](./docs/API_DOCUMENTATION.md)
+- 🗄️ [Database Schema](./docs/DATABASE_SCHEMA.md)
+- 🧠 [AI & ML Specifications](./docs/AI_ML.md)
+- 🚚 [Logistics & Matching](./docs/LOGISTICS.md)
+- 🛡️ [Security Requirements](./docs/SECURITY.md)
+
+### Project Management
+- 🤝 [Contributing & Git Workflow](./docs/CONTRIBUTING.md)
+- 👥 [Team Plan & Responsibilities](./docs/TEAM_PLAN.md)
+- 🧪 [Testing Strategy](./docs/TESTING.md)
+- 🔍 [Research & Data](./docs/RESEARCH_AND_DATA.md)
+- 🤔 [Architecture Decisions](./docs/DECISIONS.md)
+
+---
+
+## 📄 Source of Truth
+The official problem statement (SIH26033) defines the core problem. The product features, technology choices, and implementation details outlined in this repository represent our team's proposed solution and design decisions for the internal hackathon prototype.
