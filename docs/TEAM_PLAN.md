@@ -1,23 +1,33 @@
-# Team Plan — SIH Internal Hackathon
+# Team Plan — SIH26033
 
-## Current Team
+## 👥 Current Team
 
-We are currently working as a **4-member team**. The plan below is intentionally cross-functional so the team can build the complete MVP without creating unnecessary silos.
+We are currently working as a **6-member team**. The plan below is cross-functional so the team can build and demonstrate the complete MVP while keeping responsibilities clear.
 
-| Member | Primary Responsibility | Secondary Responsibility |
-|---|---|---|
-| **Ashish Ranjan Kumar** | Product / Full-Stack | Architecture & Integration |
-| **Abhishek Kumar Rai** | Backend / API | Database & Integration |
-| **Shikha Kumari** | AI/ML | Data & Analytics |
-| **Bhanu Bhavya** | Frontend / UI-UX | Testing & Demo |
+| # | Team Member | Primary Responsibility | Secondary Responsibility |
+|---|---|---|---|
+| 01 | **Ashish Ranjan Kumar** | Product / Full-Stack | Architecture & Integration |
+| 02 | **Abhishek Kumar Rai** | Backend / API | Database & Integration |
+| 03 | **Shikha Kumari** | AI/ML | Data & Analytics |
+| 04 | **Bhanu Bhavya** | Frontend / UI-UX | Testing & Demo |
+| 05 | **Janwi Kumari** | Research / Documentation | Testing & QA |
+| 06 | **Shreya** | Frontend / Presentation | Testing & Demo |
 
-> Specific ownership can be adjusted as implementation progresses. The names are confirmed; role assignments are the current working plan.
+> Specific ownership can be adjusted as implementation progresses. The responsibilities above represent the current working allocation.
 
 ## Responsibility Areas
 
-### Product & Frontend
+### Product & Architecture
+- Problem understanding and requirement analysis
+- Product planning and feature prioritization
+- System architecture
+- Cross-module integration
+- Technical decision tracking
+
+### Frontend & UI/UX
 - Farmer/FPO dashboard
 - Buyer marketplace
+- Produce listing screens
 - RFQ screens
 - Order and logistics views
 - Responsive and mobile-friendly UX
@@ -47,16 +57,17 @@ We are currently working as a **4-member team**. The plan below is intentionally
 - Shipment and route APIs
 - Prototype tracking/ETA simulation
 
-### QA, DevOps & Presentation
+### Research, QA & Documentation
+- Problem-domain research
+- Dataset research and validation
 - Unit and integration tests
 - End-to-end demo validation
-- Docker Compose setup
-- Environment/configuration checks
+- Technical documentation
 - Demo script and presentation support
 
 ## Build Strategy
 
-Because the team has four members, we will **combine related responsibilities instead of building separate microservices or departments**.
+Because the team has six members, we will keep responsibilities modular and collaborative without introducing unnecessary architectural complexity.
 
 Priority order:
 

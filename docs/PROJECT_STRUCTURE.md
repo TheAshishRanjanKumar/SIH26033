@@ -1,7 +1,7 @@
 # Project Structure — SIH26033 Solution
 
 ```text
-agridirect/
+sih26033/
 ├── frontend/
 │   ├── app/
 │   ├── components/

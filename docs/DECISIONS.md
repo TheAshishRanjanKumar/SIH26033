@@ -4,7 +4,7 @@
 
 **Decision:** Use a modular monolith instead of multiple independently deployed microservices.
 
-**Reason:** The team currently has four members, so a modular monolith keeps development, debugging and deployment manageable while preserving clear module boundaries.
+**Reason:** The team currently has six members, so a modular monolith keeps development, debugging and deployment manageable while preserving clear module boundaries.
 
 ## ADR-002 — FastAPI Backend
 
