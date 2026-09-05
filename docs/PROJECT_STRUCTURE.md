@@ -1,4 +1,4 @@
-# Project Structure — AgriDirect
+# Project Structure — SIH26033 Solution
 
 ```text
 agridirect/

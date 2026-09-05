@@ -1,4 +1,4 @@
-# AI / ML Specification — AgriDirect
+# AI / ML Specification — SIH26033 Solution
 
 ## 1. AI Requirements
 

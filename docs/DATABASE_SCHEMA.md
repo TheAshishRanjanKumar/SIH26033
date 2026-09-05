@@ -1,4 +1,4 @@
-# Database Schema — AgriDirect
+# Database Schema — SIH26033 Solution
 
 ## 1. Database
 

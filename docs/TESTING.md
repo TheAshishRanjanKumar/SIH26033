@@ -1,4 +1,4 @@
-# Testing Strategy — AgriDirect
+# Testing Strategy — SIH26033 Solution
 
 ## 1. Testing Pyramid
 

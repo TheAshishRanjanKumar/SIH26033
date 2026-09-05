@@ -1,4 +1,4 @@
-# System Architecture — AgriDirect
+# System Architecture — SIH26033 Solution
 
 ## 1. Architecture Decision
 

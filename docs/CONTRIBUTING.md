@@ -1,4 +1,4 @@
-# Contributing — AgriDirect
+# Contributing — SIH26033 Solution
 
 ## Branches
 

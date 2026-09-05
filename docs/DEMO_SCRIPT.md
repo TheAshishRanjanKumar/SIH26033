@@ -1,4 +1,4 @@
-# SIH Demo Script — AgriDirect
+# SIH Demo Script — SIH26033 Solution
 
 ## Demo Objective
 
@@ -8,7 +8,7 @@ Do not demonstrate isolated screens. Demonstrate one complete business story.
 
 Explain:
 
-> Farmers can face reduced price realization when produce passes through multiple layers. AgriDirect creates a direct digital connection between farmers/FPOs and consumers/bulk buyers and adds AI-assisted demand planning and logistics optimization.
+> Farmers can face reduced price realization when produce passes through multiple layers. SIH26033 Solution creates a direct digital connection between farmers/FPOs and consumers/bulk buyers and adds AI-assisted demand planning and logistics optimization.
 
 ## 2. Farmer — 60 seconds
 

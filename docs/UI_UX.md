@@ -1,4 +1,4 @@
-# UI/UX Requirements — AgriDirect
+# UI/UX Requirements — SIH26033 Solution
 
 ## 1. UX Principle
 

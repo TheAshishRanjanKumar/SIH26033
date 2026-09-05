@@ -1,4 +1,4 @@
-# Product Requirements Document — AgriDirect
+# Product Requirements Document — SIH26033 Solution
 
 **PS:** SIH26033  
 **Version:** 2.0  
@@ -6,7 +6,7 @@
 
 ## 1. Executive Summary
 
-AgriDirect is a digital marketplace connecting farmers/FPOs directly with consumers and bulk buyers. The platform combines marketplace workflows with logistics support, AI demand forecasting, and route optimization.
+SIH26033 Solution is a digital marketplace connecting farmers/FPOs directly with consumers and bulk buyers. The platform combines marketplace workflows with logistics support, AI demand forecasting, and route optimization.
 
 The product is designed around the official SIH26033 expected solution and should prioritize a convincing end-to-end demonstration over production-scale infrastructure.
 

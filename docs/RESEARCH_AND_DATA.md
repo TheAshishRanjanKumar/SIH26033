@@ -1,4 +1,4 @@
-# Research & Data Plan — AgriDirect
+# Research & Data Plan — SIH26033 Solution
 
 ## 1. Data Categories
 

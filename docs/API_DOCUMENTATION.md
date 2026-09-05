@@ -1,4 +1,4 @@
-# API Documentation — AgriDirect
+# API Documentation — SIH26033 Solution
 
 **Base URL:** `/api/v1`
 
