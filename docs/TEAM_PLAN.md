@@ -11,7 +11,7 @@ We are currently working as a **6-member team**. The plan below is cross-functio
 | 03 | **Shikha Kumari** | AI/ML | Data & Analytics |
 | 04 | **Bhanu Bhavya** | Frontend / UI-UX | Testing & Demo |
 | 05 | **Janwi Kumari** | Research / Documentation | Testing & QA |
-| 06 | **Shreya** | Frontend / Presentation | Testing & Demo |
+| 06 | **....** | Frontend / Presentation | Testing & Demo |
 
 > Specific ownership can be adjusted as implementation progresses. The responsibilities above represent the current working allocation.
 

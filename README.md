@@ -289,7 +289,7 @@ The application structure is being built around separate frontend and backend mo
 | **Shikha Kumari** | 🤖 AI/ML · Data & Analytics |
 | **Bhanu Bhavya** | 🎨 Frontend · UI/UX |
 | **Janwi Kumari** | 📊 Research · Documentation · Testing |
-| **Shreya** | 🚀 Frontend · Testing · Presentation |
+| **....** | 🚀 Frontend · Testing · Presentation |
 
 > Responsibilities are the current working allocation and can be adjusted as implementation progresses.
 
