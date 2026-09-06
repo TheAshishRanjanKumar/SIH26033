@@ -66,13 +66,13 @@ export default function HomePage() {
             <DistrictSelector
               onSelectDistrict={(dist) => {
                 setSelectedDistrict(dist);
-                handleOpenDetail('prices');
               }}
             />
           </div>
 
           {/* Section 3: Lokpriya Fasal (5 Popular Crop Cards) */}
           <PopularCropsGrid
+            district={selectedDistrict}
             onSelectCrop={(crop) => handleOpenDetail('prices', crop)}
           />
 

@@ -95,6 +95,24 @@ export const translations = {
     fasalDekhbhaal: 'फसल की देखभाल',
     visheshSalaah: 'विशेष सलाह',
     sahiSalaahBanner: 'सही सलाह, बेहतर पैदावार!',
+
+    // Price History & Mandi Comparison
+    mspLabel: 'सरकारी समर्थन मूल्य (MSP)',
+    aboveMsp: 'MSP से अधिक',
+    belowMsp: 'MSP से कम',
+    weeklyTrend: '7 दिनों का भाव रुझान',
+    activeMandis: 'सक्रिय मंडियां',
+    marketVolume: 'दैनिक आवक',
+    quintal: 'क्विंटल',
+    sellAdvice: 'बिक्री सलाह',
+    holdAdvice: 'भाव मजबूत है, 3-4 दिन रोक सकते हैं',
+    sellNowAdvice: 'मंडी भाव अनुकूल है, बिक्री कर सकते हैं',
+    closeBtn: 'बंद करें',
+    productionOverview: 'फसल उत्पादन परिदृश्य',
+    majorCrops: 'प्रमुख फसलें',
+    annualYield: 'वार्षिक पैदावार',
+    soilType: 'मिट्टी का प्रकार',
+    soilAlluvial: 'जलोढ़ मिट्टी (Alluvial Soil)',
   },
   en: {
     // Branding
@@ -190,6 +208,24 @@ export const translations = {
     fasalDekhbhaal: 'Crop Maintenance & Weeding',
     visheshSalaah: 'Special Seasonal Advisory',
     sahiSalaahBanner: 'Right advice, Better harvest!',
+
+    // Price History & Mandi Comparison
+    mspLabel: 'Govt Minimum Support Price (MSP)',
+    aboveMsp: 'Above MSP',
+    belowMsp: 'Below MSP',
+    weeklyTrend: '7-Day Price Trend',
+    activeMandis: 'Active Mandis',
+    marketVolume: 'Daily Arrival Volume',
+    quintal: 'Quintal',
+    sellAdvice: 'Selling Advisory',
+    holdAdvice: 'Market firm; hold for 3-4 days for better rates',
+    sellNowAdvice: 'Favorable market price; recommended to sell',
+    closeBtn: 'Close',
+    productionOverview: 'Crop Production Overview',
+    majorCrops: 'Major Crops',
+    annualYield: 'Annual Yield',
+    soilType: 'Soil Type',
+    soilAlluvial: 'Fertile Gangetic Alluvial Soil',
   },
 } as const;
 

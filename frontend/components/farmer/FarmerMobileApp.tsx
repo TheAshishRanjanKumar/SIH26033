@@ -24,7 +24,10 @@ import {
   FIVE_DAY_FORECAST,
   ADVISORY_LIST,
   PopularCrop,
+  getDistrictCropData,
+  getDistrictWeatherData,
 } from '@/lib/data/kisanData';
+import PriceHistorySheet from '@/components/farmer/PriceHistorySheet';
 
 export default function FarmerMobileApp() {
   const { t, language, toggleLanguage } = useLanguage();
@@ -34,6 +37,10 @@ export default function FarmerMobileApp() {
   const [selectedCropFilter, setSelectedCropFilter] = useState('dhaan');
   const [expandedAdvisory, setExpandedAdvisory] = useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [showHistorySheet, setShowHistorySheet] = useState(false);
+
+  const currentCropData = getDistrictCropData(selectedDistrict, selectedCrop.id);
+  const currentWeather = getDistrictWeatherData(selectedDistrict);
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between max-w-md mx-auto relative select-none">
@@ -325,21 +332,28 @@ export default function FarmerMobileApp() {
                 <div className="flex items-center justify-between pt-1 text-slate-700">
                   <span>{t('sabseAdhikDaam')}</span>
                   <span className="text-sm font-black text-slate-900">
-                    ₹ {selectedCrop.maxPrice.toLocaleString('en-IN')}
+                    ₹ {currentCropData.crop.maxPrice.toLocaleString('en-IN')}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between pt-2 text-slate-700">
                   <span>{t('sabseKamDaam')}</span>
                   <span className="text-sm font-black text-slate-900">
-                    ₹ {selectedCrop.minPrice.toLocaleString('en-IN')}
+                    ₹ {currentCropData.crop.minPrice.toLocaleString('en-IN')}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between pt-2 text-emerald-800 bg-emerald-50/50 -mx-4 px-4 py-1.5 rounded-lg">
-                  <span>{t('aamDaam')}</span>
-                  <span className="text-base font-black text-emerald-800">
-                    ₹ {selectedCrop.modalPrice.toLocaleString('en-IN')}
+                <div className="flex items-center justify-between pt-2 text-emerald-800 bg-emerald-50/70 -mx-4 px-4 py-1.5 rounded-lg">
+                  <div className="flex items-center gap-1.5">
+                    <span>{t('aamDaam')}</span>
+                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                      currentCropData.isAboveMsp ? 'bg-emerald-200 text-emerald-900' : 'bg-amber-200 text-amber-900'
+                    }`}>
+                      {currentCropData.isAboveMsp ? t('aboveMsp') : t('belowMsp')}
+                    </span>
+                  </div>
+                  <span className="text-base font-black text-emerald-900">
+                    ₹ {currentCropData.crop.modalPrice.toLocaleString('en-IN')}
                   </span>
                 </div>
               </div>
@@ -347,7 +361,7 @@ export default function FarmerMobileApp() {
               {/* Action Button matching mockup */}
               <div className="pt-2">
                 <button
-                  onClick={() => alert(`Showing history for ${selectedCrop.nameEn} in ${selectedDistrict}`)}
+                  onClick={() => setShowHistorySheet(true)}
                   className="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-3 rounded-xl text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
                 >
                   {t('puraItihaasDekhen')}
@@ -375,43 +389,54 @@ export default function FarmerMobileApp() {
           </header>
 
           <div className="p-4 space-y-3.5">
-            {/* Location Pill */}
-            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
-              <span>📍</span>
-              <span>{selectedDistrict}, {t('stateBihar')}</span>
+            {/* District Selector for Weather */}
+            <div className="relative">
+              <select
+                value={selectedDistrict}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                aria-label={t('apnaJilaChune')}
+                className="w-full appearance-none bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold text-slate-800 shadow-2xs cursor-pointer"
+              >
+                {BIHAR_DISTRICTS.map((d) => (
+                  <option key={d} value={d}>
+                    📍 {d}, {t('stateBihar')}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
             </div>
 
             {/* Weather Hero Card matching mockup */}
             <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs text-center space-y-2">
               <div className="w-20 h-20 mx-auto flex items-center justify-center text-5xl">
-                ⛅
+                {currentWeather.icon === 'sun' ? '☀️' : currentWeather.icon === 'rain' ? '🌧️' : '⛅'}
               </div>
 
               <div className="text-4xl font-black text-slate-900 tracking-tight">
-                32°C
+                {currentWeather.temp}°C
               </div>
 
               <div className="text-sm font-bold text-slate-600">
-                {t('halkaBadal')}
+                {language === 'hi' ? currentWeather.conditionHi : currentWeather.conditionEn}
               </div>
 
               {/* 3 Metric Pills matching mockup */}
               <div className="grid grid-cols-3 gap-2 pt-4 border-t border-slate-100 text-center text-xs">
                 <div>
                   <div className="text-slate-400">💧</div>
-                  <div className="font-black text-slate-900 mt-0.5">0 mm</div>
+                  <div className="font-black text-slate-900 mt-0.5">{currentWeather.rainMm} mm</div>
                   <div className="text-[10px] text-slate-400 font-medium">{t('aajKiBarish')}</div>
                 </div>
 
                 <div>
                   <div className="text-slate-400">💨</div>
-                  <div className="font-black text-slate-900 mt-0.5">68%</div>
+                  <div className="font-black text-slate-900 mt-0.5">{currentWeather.humidity}%</div>
                   <div className="text-[10px] text-slate-400 font-medium">{t('nami')}</div>
                 </div>
 
                 <div>
                   <div className="text-slate-400">🌪️</div>
-                  <div className="font-black text-slate-900 mt-0.5">12 km/h</div>
+                  <div className="font-black text-slate-900 mt-0.5">{currentWeather.windSpeed} km/h</div>
                   <div className="text-[10px] text-slate-400 font-medium">{t('hawaKiRaftaar')}</div>
                 </div>
               </div>
@@ -424,7 +449,7 @@ export default function FarmerMobileApp() {
               </h4>
 
               <div className="space-y-2 divide-y divide-slate-100">
-                {FIVE_DAY_FORECAST.map((f, i) => (
+                {currentWeather.forecast.map((f, i) => (
                   <div key={i} className="flex items-center justify-between pt-2 first:pt-0 text-xs font-bold text-slate-800">
                     <div className="flex items-center gap-2">
                       <span className="text-base">
@@ -572,6 +597,15 @@ export default function FarmerMobileApp() {
           <span className="text-[10px]">{t('tabAdvisory')}</span>
         </button>
       </nav>
+
+      {/* Price History & Mandi Comparison Sheet */}
+      {showHistorySheet && (
+        <PriceHistorySheet
+          district={selectedDistrict}
+          cropId={selectedCrop.id}
+          onClose={() => setShowHistorySheet(false)}
+        />
+      )}
     </div>
   );
 }

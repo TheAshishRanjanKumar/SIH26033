@@ -2,13 +2,14 @@
 
 import React from 'react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
-import { POPULAR_CROPS, PopularCrop } from '@/lib/data/kisanData';
+import { POPULAR_CROPS, PopularCrop, getDistrictCropData } from '@/lib/data/kisanData';
 
 interface PopularCropsGridProps {
+  district?: string;
   onSelectCrop?: (crop: PopularCrop) => void;
 }
 
-export default function PopularCropsGrid({ onSelectCrop }: PopularCropsGridProps) {
+export default function PopularCropsGrid({ district = 'Patna', onSelectCrop }: PopularCropsGridProps) {
   const { t, language } = useLanguage();
 
   // Visual SVG illustrations representing the 5 crops realistically matching the mockup photo cards
@@ -127,47 +128,65 @@ export default function PopularCropsGrid({ onSelectCrop }: PopularCropsGridProps
 
   return (
     <section className="space-y-4 text-left">
-      <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-        {t('lokpriyaFasal')}
-      </h3>
+      <div className="flex items-center justify-between">
+        <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+          {t('lokpriyaFasal')} — <span className="text-emerald-800">{district}</span>
+        </h3>
+        <span className="text-xs font-semibold text-slate-500">
+          (₹ / {t('quintal')})
+        </span>
+      </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        {POPULAR_CROPS.map((crop) => (
-          <div
-            key={crop.id}
-            onClick={() => onSelectCrop && onSelectCrop(crop)}
-            className="bg-white border border-slate-200/90 rounded-3xl p-3 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group cursor-pointer"
-          >
-            <div>
-              {/* Photo representation */}
-              <div className="overflow-hidden rounded-2xl mb-3 shadow-2xs group-hover:scale-102 transition-transform">
-                {cropVisuals[crop.id] || (
-                  <div className="w-full h-28 bg-slate-100 flex items-center justify-center text-3xl">
-                    🌾
-                  </div>
-                )}
+        {POPULAR_CROPS.map((crop) => {
+          const cropData = getDistrictCropData(district, crop.id);
+          return (
+            <div
+              key={crop.id}
+              onClick={() => onSelectCrop && onSelectCrop(cropData.crop)}
+              className="bg-white border border-slate-200/90 rounded-3xl p-3 shadow-xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
+            >
+              <div>
+                {/* Photo representation */}
+                <div className="overflow-hidden rounded-2xl mb-3 shadow-2xs group-hover:scale-102 transition-transform">
+                  {cropVisuals[crop.id] || (
+                    <div className="w-full h-28 bg-slate-100 flex items-center justify-center text-3xl">
+                      🌾
+                    </div>
+                  )}
+                </div>
+
+                {/* Crop Name */}
+                <h4 className="text-base font-black text-slate-900 text-center leading-tight">
+                  {language === 'hi' ? crop.nameHi : crop.nameEn}
+                </h4>
+
+                {/* Price Display */}
+                <div className="mt-1 text-center">
+                  <span className="text-base font-black text-emerald-900">
+                    ₹ {cropData.crop.modalPrice.toLocaleString('en-IN')}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-medium block">
+                    {t('aamDaam')}
+                  </span>
+                </div>
               </div>
 
-              {/* Crop Name */}
-              <h4 className="text-base font-black text-slate-900 text-center leading-tight">
-                {language === 'hi' ? crop.nameHi : crop.nameEn}
-              </h4>
+              {/* Daam Dekhen Button matching mockup */}
+              <div className="mt-3">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onSelectCrop) onSelectCrop(cropData.crop);
+                  }}
+                  className="w-full py-2 px-2 bg-amber-100/90 hover:bg-amber-200 text-amber-950 rounded-xl font-bold text-xs flex items-center justify-center gap-1 transition-colors cursor-pointer"
+                >
+                  <span>{t('daamDekhen')}</span>
+                </button>
+              </div>
             </div>
-
-            {/* Daam Dekhen Button matching mockup */}
-            <div className="mt-3">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (onSelectCrop) onSelectCrop(crop);
-                }}
-                className="w-full py-2 px-2 bg-amber-100/90 hover:bg-amber-200 text-amber-950 rounded-xl font-bold text-xs flex items-center justify-center gap-1 transition-colors cursor-pointer"
-              >
-                <span>{t('daamDekhen')}</span>
-              </button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
