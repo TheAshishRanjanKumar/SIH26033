@@ -1,0 +1,7 @@
+split,model,n_samples,mae,rmse,r2,mean_actual,mean_predicted,mape_pct
+VALIDATION,Naive Persistence (Lag-1D / day-t fallback),17263,435.59,4741.22,-0.2189,2218.76,2186.43,19.35
+VALIDATION,7-Day Moving Average (Roll-7D / day-t fallback),17263,446.31,3935.42,0.1602,2218.76,2156.72,20.41
+VALIDATION,Random Forest Regressor,17263,410.12,3940.44,0.1581,2218.76,2149.49,18.48
+TEST,Naive Persistence (Lag-1D),7519,366.72,6042.83,0.0484,2917.81,2813.18,9.08
+TEST,7-Day Moving Average,7519,448.69,6288.4,-0.0305,2917.81,2865.75,12.37
+TEST,Random Forest Regressor,7519,423.95,6125.78,0.0221,2917.81,2732.36,10.34

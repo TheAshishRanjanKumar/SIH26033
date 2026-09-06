@@ -1,0 +1,101 @@
+{
+  "forecasting_objective": "7\u201310 day-ahead wholesale modal price forecasting",
+  "target": "target_modal_price_t7",
+  "unit": "INR per quintal (\u20b9/quintal)",
+  "timestamp_convention": "Prediction is made after end-of-day t market/weather observations are available.",
+  "splits": {
+    "train": {
+      "n_samples": 55194,
+      "date_min": "2018-01-01",
+      "date_max": "2022-12-24"
+    },
+    "validation": {
+      "n_samples": 17263,
+      "date_min": "2023-01-01",
+      "date_max": "2023-12-24"
+    },
+    "test": {
+      "n_samples": 7519,
+      "date_min": "2024-01-01",
+      "date_max": "2025-06-23"
+    }
+  },
+  "validation_metrics": {
+    "naive_persistence": {
+      "model": "Naive Persistence (Lag-1D / day-t fallback)",
+      "n_samples": 17263,
+      "mae": 435.59,
+      "rmse": 4741.22,
+      "r2": -0.2189,
+      "mean_actual": 2218.76,
+      "mean_predicted": 2186.43,
+      "mape_pct": 19.35
+    },
+    "moving_average_7d": {
+      "model": "7-Day Moving Average (Roll-7D / day-t fallback)",
+      "n_samples": 17263,
+      "mae": 446.31,
+      "rmse": 3935.42,
+      "r2": 0.1602,
+      "mean_actual": 2218.76,
+      "mean_predicted": 2156.72,
+      "mape_pct": 20.41
+    },
+    "random_forest": {
+      "model": "Random Forest Regressor",
+      "n_samples": 17263,
+      "mae": 410.12,
+      "rmse": 3940.44,
+      "r2": 0.1581,
+      "mean_actual": 2218.76,
+      "mean_predicted": 2149.49,
+      "mape_pct": 18.48
+    }
+  },
+  "test_metrics": {
+    "naive_persistence": {
+      "model": "Naive Persistence (Lag-1D)",
+      "n_samples": 7519,
+      "mae": 366.72,
+      "rmse": 6042.83,
+      "r2": 0.0484,
+      "mean_actual": 2917.81,
+      "mean_predicted": 2813.18,
+      "mape_pct": 9.08
+    },
+    "moving_average_7d": {
+      "model": "7-Day Moving Average",
+      "n_samples": 7519,
+      "mae": 448.69,
+      "rmse": 6288.4,
+      "r2": -0.0305,
+      "mean_actual": 2917.81,
+      "mean_predicted": 2865.75,
+      "mape_pct": 12.37
+    },
+    "random_forest": {
+      "model": "Random Forest Regressor",
+      "n_samples": 7519,
+      "mae": 423.95,
+      "rmse": 6125.78,
+      "r2": 0.0221,
+      "mean_actual": 2917.81,
+      "mean_predicted": 2732.36,
+      "mape_pct": 10.34
+    }
+  },
+  "selected_model": {
+    "name": "Random Forest Regressor",
+    "hyperparameters": {
+      "n_estimators": 300,
+      "max_depth": 20,
+      "min_samples_leaf": 2,
+      "max_features": 0.5,
+      "random_state": 42
+    },
+    "validation_mae": 410.12,
+    "test_mae": 423.95,
+    "test_rmse": 6125.78,
+    "test_r2": 0.0221
+  }
+}
