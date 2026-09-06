@@ -1,307 +1,193 @@
-export interface CropForecastPoint {
-  month: string;
-  historical: number | null;
-  forecasted: number | null;
-  tooltip?: {
-    date: string;
-    price: number;
-    change: string;
-    predicted: boolean;
-  };
-}
+export const BIHAR_DISTRICTS = [
+  'Patna',
+  'Gaya',
+  'Muzaffarpur',
+  'Darbhanga',
+  'Bhagalpur',
+  'Purnea',
+  'Rohtas',
+  'Nalanda',
+  'Bhojpur',
+  'Buxar',
+  'Kaimur',
+  'Saran',
+  'Siwan',
+  'Gopalganj',
+  'Vaishali',
+  'Samastipur',
+  'Begusarai',
+  'Khagaria',
+  'Munger',
+  'Lakhisarai',
+  'Sheikhpura',
+  'Nawada',
+  'Jehanabad',
+  'Arwal',
+  'Aurangabad',
+  'Jamui',
+  'Banka',
+  'Saharsa',
+  'Madhepura',
+  'Supaul',
+  'Araria',
+  'Kishanganj',
+  'Katihar',
+  'West Champaran',
+  'East Champaran',
+  'Sitamarhi',
+  'Sheohar',
+  'Madhubani',
+] as const;
 
-export interface CropInfo {
+export interface PopularCrop {
   id: string;
-  nameKey: 'cropPaddy' | 'cropWheat' | 'cropMaize' | 'cropLentil' | 'cropGram';
+  nameHi: string;
   nameEn: string;
-  nameHi: string;
-  currentPrice: number;
-  predictedPrice: number;
+  variety: string;
+  maxPrice: number;
+  minPrice: number;
+  modalPrice: number;
   trend: string;
-  isPositive: boolean;
-  production2023: string;
-  seasonEn: string;
-  seasonHi: string;
-  districts: string;
-  descriptionEn: string;
-  descriptionHi: string;
-  forecast6M: CropForecastPoint[];
-  productionHistory: { year: string; value: number }[];
-}
-
-export const CROPS_DATA: Record<string, CropInfo> = {
-  paddy: {
-    id: 'paddy',
-    nameKey: 'cropPaddy',
-    nameEn: 'Paddy (Dhan)',
-    nameHi: 'धान (Paddy)',
-    currentPrice: 2180,
-    predictedPrice: 2320,
-    trend: '+12%',
-    isPositive: true,
-    production2023: '95.2 L Tonnes',
-    seasonEn: 'Kharif · Major crop in Bihar',
-    seasonHi: 'खरीफ · बिहार की प्रमुख फसल',
-    districts: 'Patna, Gaya, Purnea',
-    descriptionEn:
-      'Paddy is the most important food crop in Bihar, widely cultivated during the Kharif season. It plays a key role in the state\'s food security and farmer livelihood.',
-    descriptionHi:
-      'धान बिहार की सबसे महत्वपूर्ण खाद्य फसल है, जिसकी खरीफ मौसम में व्यापक खेती की जाती है। यह राज्य की खाद्य सुरक्षा और किसानों की आजीविका में महत्वपूर्ण भूमिका निभाती है।',
-    forecast6M: [
-      { month: 'Jan', historical: 1500, forecasted: null },
-      { month: 'Feb', historical: 1950, forecasted: null },
-      { month: 'Mar', historical: 1980, forecasted: null },
-      { month: 'Apr', historical: 2180, forecasted: 2180 },
-      { month: 'May', historical: null, forecasted: 2050 },
-      {
-        month: 'Jun',
-        historical: null,
-        forecasted: 2320,
-        tooltip: {
-          date: 'Jun 2025',
-          price: 2320,
-          change: '↑ 12% from last month',
-          predicted: true,
-        },
-      },
-    ],
-    productionHistory: [
-      { year: '2019', value: 58 },
-      { year: '2020', value: 68 },
-      { year: '2021', value: 78 },
-      { year: '2022', value: 86 },
-      { year: '2023', value: 104 },
-    ],
-  },
-  wheat: {
-    id: 'wheat',
-    nameKey: 'cropWheat',
-    nameEn: 'Wheat',
-    nameHi: 'गेहूं (Wheat)',
-    currentPrice: 2350,
-    predictedPrice: 2480,
-    trend: '+8%',
-    isPositive: true,
-    production2023: '68.5 L Tonnes',
-    seasonEn: 'Rabi · Key cereal crop',
-    seasonHi: 'रबी · प्रमुख अनाज फसल',
-    districts: 'Rohtas, Bhojpur, Nalanda',
-    descriptionEn:
-      'Wheat is the leading Rabi cereal in Bihar with extensive acreage in southern and central plains benefiting from canal and tube well irrigation.',
-    descriptionHi:
-      'गेहूं बिहार में रबी की प्रमुख अनाज फसल है, जिसकी दक्षिण और मध्य मैदानी इलाकों में व्यापक खेती की जाती है।',
-    forecast6M: [
-      { month: 'Jan', historical: 2100, forecasted: null },
-      { month: 'Feb', historical: 2180, forecasted: null },
-      { month: 'Mar', historical: 2240, forecasted: null },
-      { month: 'Apr', historical: 2350, forecasted: 2350 },
-      { month: 'May', historical: null, forecasted: 2400 },
-      {
-        month: 'Jun',
-        historical: null,
-        forecasted: 2480,
-        tooltip: {
-          date: 'Jun 2025',
-          price: 2480,
-          change: '↑ 5% from last month',
-          predicted: true,
-        },
-      },
-    ],
-    productionHistory: [
-      { year: '2019', value: 50 },
-      { year: '2020', value: 55 },
-      { year: '2021', value: 60 },
-      { year: '2022', value: 63 },
-      { year: '2023', value: 69 },
-    ],
-  },
-  maize: {
-    id: 'maize',
-    nameKey: 'cropMaize',
-    nameEn: 'Maize',
-    nameHi: 'मक्का (Maize)',
-    currentPrice: 1870,
-    predictedPrice: 1780,
-    trend: '-5%',
-    isPositive: false,
-    production2023: '48.0 L Tonnes',
-    seasonEn: 'Rabi / Kharif · High yield in Koshi belt',
-    seasonHi: 'रबी / खरीफ · कोशी क्षेत्र में उच्च उत्पादन',
-    districts: 'Khagaria, Saharsa, Samastipur',
-    descriptionEn:
-      'Bihar is known as the maize bowl of India. The Koshi-Seemanchal belt produces top-grade hybrid maize with immense industrial and export demand.',
-    descriptionHi:
-      'बिहार को भारत का मक्का कटोरा कहा जाता है। कोशी-सीमांचल क्षेत्र में उच्च गुणवत्ता वाले हाइब्रिड मक्के का भारी उत्पादन होता है।',
-    forecast6M: [
-      { month: 'Jan', historical: 1950, forecasted: null },
-      { month: 'Feb', historical: 1900, forecasted: null },
-      { month: 'Mar', historical: 1880, forecasted: null },
-      { month: 'Apr', historical: 1870, forecasted: 1870 },
-      { month: 'May', historical: null, forecasted: 1820 },
-      {
-        month: 'Jun',
-        historical: null,
-        forecasted: 1780,
-        tooltip: {
-          date: 'Jun 2025',
-          price: 1780,
-          change: '↓ 2% from last month',
-          predicted: true,
-        },
-      },
-    ],
-    productionHistory: [
-      { year: '2019', value: 30 },
-      { year: '2020', value: 35 },
-      { year: '2021', value: 40 },
-      { year: '2022', value: 44 },
-      { year: '2023', value: 50 },
-    ],
-  },
-  lentil: {
-    id: 'lentil',
-    nameKey: 'cropLentil',
-    nameEn: 'Lentil (Masoor)',
-    nameHi: 'मसूर (Lentil)',
-    currentPrice: 6200,
-    predictedPrice: 6500,
-    trend: '+15%',
-    isPositive: true,
-    production2023: '18.4 L Tonnes',
-    seasonEn: 'Rabi · High protein pulse',
-    seasonHi: 'रबी · प्रमुख दलहन फसल',
-    districts: 'Patna (Tal area), Nalanda, Gaya',
-    descriptionEn:
-      'Bihar’s Mokama and Barh Tal lands are famous worldwide for high-protein pulses, particularly Masoor, produced organically in receding floodwaters.',
-    descriptionHi:
-      'बिहार के मोकामा और बाढ़ टाल क्षेत्र उच्च प्रोटीन युक्त दलहन, विशेषकर मसूर के लिए प्रसिद्ध हैं।',
-    forecast6M: [
-      { month: 'Jan', historical: 5400, forecasted: null },
-      { month: 'Feb', historical: 5650, forecasted: null },
-      { month: 'Mar', historical: 5900, forecasted: null },
-      { month: 'Apr', historical: 6200, forecasted: 6200 },
-      { month: 'May', historical: null, forecasted: 6350 },
-      {
-        month: 'Jun',
-        historical: null,
-        forecasted: 6500,
-        tooltip: {
-          date: 'Jun 2025',
-          price: 6500,
-          change: '↑ 3% from last month',
-          predicted: true,
-        },
-      },
-    ],
-    productionHistory: [
-      { year: '2019', value: 12 },
-      { year: '2020', value: 13 },
-      { year: '2021', value: 15 },
-      { year: '2022', value: 16 },
-      { year: '2023', value: 19 },
-    ],
-  },
-  gram: {
-    id: 'gram',
-    nameKey: 'cropGram',
-    nameEn: 'Gram (Chana)',
-    nameHi: 'चना (Gram)',
-    currentPrice: 5850,
-    predictedPrice: 6100,
-    trend: '+10%',
-    isPositive: true,
-    production2023: '14.2 L Tonnes',
-    seasonEn: 'Rabi · High market demand',
-    seasonHi: 'रबी · उच्च बाजार मांग',
-    districts: 'Rohtas, Buxar, Aurangabad',
-    descriptionEn:
-      'Gram is heavily grown in the southwestern districts with expanding market arrivals and solid support price realization.',
-    descriptionHi:
-      'चना दक्षिण-पश्चिमी जिलों में प्रमुखता से उगाया जाता है और मंडियों में इसकी अच्छी आवक व मूल्य प्राप्ति होती है।',
-    forecast6M: [
-      { month: 'Jan', historical: 5100, forecasted: null },
-      { month: 'Feb', historical: 5300, forecasted: null },
-      { month: 'Mar', historical: 5600, forecasted: null },
-      { month: 'Apr', historical: 5850, forecasted: 5850 },
-      { month: 'May', historical: null, forecasted: 5980 },
-      {
-        month: 'Jun',
-        historical: null,
-        forecasted: 6100,
-        tooltip: {
-          date: 'Jun 2025',
-          price: 6100,
-          change: '↑ 2% from last month',
-          predicted: true,
-        },
-      },
-    ],
-    productionHistory: [
-      { year: '2019', value: 9 },
-      { year: '2020', value: 10 },
-      { year: '2021', value: 12 },
-      { year: '2022', value: 13 },
-      { year: '2023', value: 15 },
-    ],
-  },
-};
-
-export interface DistrictRainfall {
-  name: string;
-  nameHi: string;
-  rainfallMm: number;
-  level: 'low' | 'med-low' | 'med' | 'med-high' | 'high';
+  image: string;
   color: string;
 }
 
-export const BIHAR_DISTRICT_RAINFALL: DistrictRainfall[] = [
-  { name: 'Patna', nameHi: 'पटना', rainfallMm: 120, level: 'high', color: '#1d4ed8' },
-  { name: 'Gaya', nameHi: 'गया', rainfallMm: 98, level: 'med', color: '#3b82f6' },
-  { name: 'Muzaffarpur', nameHi: 'मुजफ्फरपुर', rainfallMm: 110, level: 'med-high', color: '#2563eb' },
-  { name: 'Darbhanga', nameHi: 'दरभंगा', rainfallMm: 85, level: 'med-low', color: '#60a5fa' },
-  { name: 'Purnea', nameHi: 'पूर्णिया', rainfallMm: 140, level: 'high', color: '#1e40af' },
-  { name: 'Kishanganj', nameHi: 'किशनगंज', rainfallMm: 155, level: 'high', color: '#172554' },
-  { name: 'Bhagalpur', nameHi: 'भागलपुर', rainfallMm: 115, level: 'med-high', color: '#2563eb' },
-  { name: 'Nalanda', nameHi: 'नालंदा', rainfallMm: 102, level: 'med', color: '#3b82f6' },
-  { name: 'Rohtas', nameHi: 'रोहतास', rainfallMm: 88, level: 'med-low', color: '#60a5fa' },
-  { name: 'West Champaran', nameHi: 'प. चंपारण', rainfallMm: 135, level: 'high', color: '#1d4ed8' },
-  { name: 'East Champaran', nameHi: 'पू. चंपारण', rainfallMm: 125, level: 'high', color: '#1d4ed8' },
-  { name: 'Madhubani', nameHi: 'मधुबनी', rainfallMm: 90, level: 'med', color: '#3b82f6' },
-  { name: 'Samastipur', nameHi: 'समस्तीपुर', rainfallMm: 95, level: 'med', color: '#3b82f6' },
-  { name: 'Saharsa', nameHi: 'सहरसा', rainfallMm: 105, level: 'med-high', color: '#2563eb' },
-  { name: 'Katihar', nameHi: 'कटिहार', rainfallMm: 130, level: 'high', color: '#1d4ed8' },
-  { name: 'Saran', nameHi: 'सारण', rainfallMm: 86, level: 'med-low', color: '#60a5fa' },
-  { name: 'Vaishali', nameHi: 'वैशाली', rainfallMm: 108, level: 'med-high', color: '#2563eb' },
-  { name: 'Siwan', nameHi: 'सीवान', rainfallMm: 78, level: 'low', color: '#93c5fd' },
-  { name: 'Gopalganj', nameHi: 'गोपालगंज', rainfallMm: 82, level: 'med-low', color: '#60a5fa' },
-  { name: 'Buxar', nameHi: 'बक्सर', rainfallMm: 79, level: 'low', color: '#93c5fd' },
+export const POPULAR_CROPS: PopularCrop[] = [
+  {
+    id: 'dhaan',
+    nameHi: 'धान',
+    nameEn: 'Paddy',
+    variety: 'Kharif',
+    maxPrice: 2320,
+    minPrice: 1850,
+    modalPrice: 2100,
+    trend: '+8%',
+    image: '🌾',
+    color: '#16a34a',
+  },
+  {
+    id: 'gehu',
+    nameHi: 'गेहूं',
+    nameEn: 'Wheat',
+    variety: 'Rabi',
+    maxPrice: 2450,
+    minPrice: 2150,
+    modalPrice: 2350,
+    trend: '+5%',
+    image: '🌾',
+    color: '#ca8a04',
+  },
+  {
+    id: 'makki',
+    nameHi: 'मक्का',
+    nameEn: 'Maize',
+    variety: 'Kharif / Rabi',
+    maxPrice: 1980,
+    minPrice: 1650,
+    modalPrice: 1870,
+    trend: '-2%',
+    image: '🌽',
+    color: '#eab308',
+  },
+  {
+    id: 'dal',
+    nameHi: 'दाल',
+    nameEn: 'Pulses',
+    variety: 'Masoor / Chana',
+    maxPrice: 6600,
+    minPrice: 5800,
+    modalPrice: 6200,
+    trend: '+12%',
+    image: '🫘',
+    color: '#b45309',
+  },
+  {
+    id: 'pyaaz',
+    nameHi: 'प्याज',
+    nameEn: 'Onion',
+    variety: 'Nashik / Local',
+    maxPrice: 2200,
+    minPrice: 1500,
+    modalPrice: 1850,
+    trend: '-4%',
+    image: '🧅',
+    color: '#e11d48',
+  },
 ];
 
-export const MARKET_ALERTS = [
-  {
-    id: '1',
-    textEn: 'Maize prices up 8% in Saharsa',
-    textHi: 'सहरसा में मक्के का भाव 8% बढ़ा',
-    timeEn: '2 hours ago',
-    timeHi: '2 घंटे पहले',
-    type: 'up',
-  },
-  {
-    id: '2',
-    textEn: 'Onion prices down 5% in Patna',
-    textHi: 'पटना में प्याज का भाव 5% गिरा',
-    timeEn: '5 hours ago',
-    timeHi: '5 घंटे पहले',
-    type: 'down',
-  },
-  {
-    id: '3',
-    textEn: 'Paddy demand increasing in Muzaffarpur',
-    textHi: 'मुजफ्फरपुर में धान की मांग बढ़ी',
-    timeEn: '1 day ago',
-    timeHi: '1 दिन पहले',
-    type: 'up',
-  },
+export interface DailyForecast {
+  dayHi: string;
+  dayEn: string;
+  temp: number;
+  conditionHi: string;
+  conditionEn: string;
+  icon: 'sun' | 'cloud' | 'rain';
+}
+
+export const FIVE_DAY_FORECAST: DailyForecast[] = [
+  { dayHi: 'कल', dayEn: 'Tomorrow', temp: 31, conditionHi: 'साफ धूप', conditionEn: 'Sunny', icon: 'sun' },
+  { dayHi: 'परसों', dayEn: 'Day after tomorrow', temp: 30, conditionHi: 'हल्का बादल', conditionEn: 'Partly Cloudy', icon: 'cloud' },
+  { dayHi: '3 दिन बाद', dayEn: 'After 3 days', temp: 29, conditionHi: 'हल्की बारिश', conditionEn: 'Light Rain', icon: 'rain' },
+  { dayHi: '4 दिन बाद', dayEn: 'After 4 days', temp: 28, conditionHi: 'साफ मौसम', conditionEn: 'Clear Sky', icon: 'sun' },
+  { dayHi: '5 दिन बाद', dayEn: 'After 5 days', temp: 30, conditionHi: 'धूप', conditionEn: 'Sunny', icon: 'sun' },
 ];
 
+export interface AdvisoryItem {
+  id: string;
+  titleKey: 'buaaiKaSamay' | 'sinchaiKeSujhav' | 'khadKaUpyog' | 'rogAurKeet' | 'fasalDekhbhaal' | 'visheshSalaah';
+  icon: string;
+  color: string;
+  detailHi: string;
+  detailEn: string;
+}
+
+export const ADVISORY_LIST: AdvisoryItem[] = [
+  {
+    id: 'buaai',
+    titleKey: 'buaaiKaSamay',
+    icon: '🌱',
+    color: 'bg-emerald-50 text-emerald-700',
+    detailHi: 'धान की रोपाई के लिए अभी अनुकूल समय है। 20-25 दिन पुराने पौधे ही खेत में लगाएं।',
+    detailEn: 'Optimal period for paddy transplanting. Transplant 20-25 day old seedlings for best tillering.',
+  },
+  {
+    id: 'sinchai',
+    titleKey: 'sinchaiKeSujhav',
+    icon: '💧',
+    color: 'bg-blue-50 text-blue-700',
+    detailHi: 'अगले दो दिनों में बारिश की संभावना है, इसलिए खेत में अतिरिक्त सिंचाई रोकें और जल निकासी सुनिश्चित करें।',
+    detailEn: 'Light rainfall expected in next 48 hours; suspend additional irrigation and maintain drainage.',
+  },
+  {
+    id: 'khad',
+    titleKey: 'khadKaUpyog',
+    icon: '🌾',
+    color: 'bg-amber-50 text-amber-700',
+    detailHi: 'रोपाई के समय डीएपी और पोटाश की संस्तुत मात्रा का प्रयोग करें। यूरिया 3 किस्तों में दें।',
+    detailEn: 'Apply recommended DAP and MOP at transplanting. Split urea into 3 top dressings.',
+  },
+  {
+    id: 'keet',
+    titleKey: 'rogAurKeet',
+    icon: '🐛',
+    color: 'bg-rose-50 text-rose-700',
+    detailHi: 'तना छेदक कीट के लक्षण दिखने पर नीम आधारित कीटनाशक (1500 पीपीएम) का 3 मिली प्रति लीटर पानी में छिड़काव करें।',
+    detailEn: 'For stem borer symptoms, spray neem-based insecticide (1500 ppm) at 3 ml/L of water.',
+  },
+  {
+    id: 'dekhbhaal',
+    titleKey: 'fasalDekhbhaal',
+    icon: '🌿',
+    color: 'bg-green-50 text-green-700',
+    detailHi: 'रोपाई के 15-20 दिन बाद पहली निराई-गुड़ाई करें ताकि खरपतवार पोषण न खींचें।',
+    detailEn: 'Conduct first weeding 15-20 days post-transplanting to prevent weed competition.',
+  },
+  {
+    id: 'vishesh',
+    titleKey: 'visheshSalaah',
+    icon: '📄',
+    color: 'bg-purple-50 text-purple-700',
+    detailHi: 'सरकारी समर्थन मूल्य (MSP) और निकटतम पैक्स (PACS) केंद्रों पर पंजीकरण हेतु किसान कार्ड अपडेट रखें।',
+    detailEn: 'Keep farmer registration updated for Government Minimum Support Price (MSP) procurement.',
+  },
+];

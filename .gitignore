@@ -44,3 +44,5 @@ Thumbs.db
 
 # Large scrap/dump files
 agmark*.json
+bihar*.json
+*.png
