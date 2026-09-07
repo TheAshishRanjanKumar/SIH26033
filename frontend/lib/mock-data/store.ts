@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { Listing, RFQ, Order, User } from './types';
-import { mockUsers, initialListings, initialRFQs, initialOrders } from './seed';
+import { initialListings, initialRFQs, initialOrders } from './seed';
 
 interface AppState {
   currentUser: User | null;

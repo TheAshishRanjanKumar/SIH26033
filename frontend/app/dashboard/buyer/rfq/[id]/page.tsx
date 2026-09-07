@@ -3,19 +3,21 @@ import { useAppStore } from '@/lib/mock-data/store';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, Users, Package, MapPin, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { Listing } from '@/lib/mock-data/types';
+import { useTranslation } from '@/lib/i18n';
 import { use } from 'react';
 
 export default function RFQPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
   const id = resolvedParams.id;
   const { rfqs, listings, addOrder } = useAppStore();
+  const { t } = useTranslation();
   const router = useRouter();
 
   const rfq = rfqs.find(r => r.id === id);
   if (!rfq) return (
     <div className="flex flex-col items-center justify-center py-20">
       <AlertTriangle className="w-10 h-10 text-muted mb-3" />
-      <p className="text-muted">RFQ not found</p>
+      <p className="text-muted font-medium">{t.rfqNotFound}</p>
     </div>
   );
 
@@ -41,6 +43,7 @@ export default function RFQPage({ params }: { params: Promise<{ id: string }> })
     const totalQuantity = selectedListings.reduce((sum, l) => sum + l.quantityKg, 0);
 
     const newOrder = {
+      // eslint-disable-next-line react-hooks/purity
       id: `o_${Date.now()}`,
       rfqId: rfq.id,
       buyerId: rfq.buyerId,
@@ -55,48 +58,48 @@ export default function RFQPage({ params }: { params: Promise<{ id: string }> })
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6 pb-20 md:pb-8">
       <div>
-        <h1 className="page-title">Supply Aggregation</h1>
-        <p className="text-sm text-muted mt-1">Matching farmers & FPOs for your {rfq.crop} requirement</p>
+        <h1 className="page-title text-xl sm:text-2xl">{t.supplyAggregationTitle}</h1>
+        <p className="text-xs sm:text-sm text-muted mt-1">{t.matchingSuppliersFor} ({rfq.crop})</p>
       </div>
 
       {/* RFQ Summary */}
-      <div className="section-card">
+      <div className="section-card rounded-2xl shadow-xs">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div>
-            <div className="text-xs text-muted uppercase tracking-wide mb-1">Crop</div>
-            <div className="font-semibold text-foreground">{rfq.crop} <span className="badge-slate ml-1">Grade {rfq.grade}</span></div>
+            <div className="text-xs text-muted uppercase tracking-wider mb-1 font-bold">{t.crop}</div>
+            <div className="font-bold text-foreground text-base">{rfq.crop} <span className="badge-slate ml-1 text-xs">{t.grade} {rfq.grade}</span></div>
           </div>
           <div>
-            <div className="text-xs text-muted uppercase tracking-wide mb-1">Required Qty</div>
-            <div className="font-semibold text-foreground">{rfq.quantityKg.toLocaleString()} kg</div>
+            <div className="text-xs text-muted uppercase tracking-wider mb-1 font-bold">{t.requiredQuantity}</div>
+            <div className="font-bold text-foreground text-base">{rfq.quantityKg.toLocaleString()} {t.kg}</div>
           </div>
           <div>
-            <div className="text-xs text-muted uppercase tracking-wide mb-1">Target Price</div>
-            <div className="font-semibold text-foreground">₹{rfq.targetPricePerKg}/kg</div>
+            <div className="text-xs text-muted uppercase tracking-wider mb-1 font-bold">{t.targetPrice}</div>
+            <div className="font-bold text-foreground text-base">₹{rfq.targetPricePerKg} {t.perKg}</div>
           </div>
           <div>
-            <div className="text-xs text-muted uppercase tracking-wide mb-1">Delivery By</div>
-            <div className="font-semibold text-foreground">{rfq.requiredByDate}</div>
+            <div className="text-xs text-muted uppercase tracking-wider mb-1 font-bold">{t.deliveryBy}</div>
+            <div className="font-bold text-foreground text-base">{rfq.requiredByDate}</div>
           </div>
         </div>
       </div>
 
       {/* Progress */}
-      <div className="section-card">
+      <div className="section-card rounded-2xl shadow-xs">
         <div className="flex items-center justify-between mb-3">
-          <div className="section-title flex items-center gap-2">
+          <div className="section-title flex items-center gap-2 text-base">
             <Users className="w-4 h-4 text-primary" />
-            Supply Sources ({selectedListings.length} matched)
+            {t.supplySources} ({selectedListings.length})
           </div>
-          <span className={fulfillmentPct >= 100 ? 'badge-green' : 'badge-amber'}>
-            {fulfillmentPct}% fulfilled
+          <span className={`${fulfillmentPct >= 100 ? 'badge-green' : 'badge-amber'} font-bold`}>
+            {fulfillmentPct}% {t.fulfilled}
           </span>
         </div>
 
         {/* Progress bar */}
-        <div className="w-full h-2 bg-slate-100 rounded-full mb-5 overflow-hidden">
+        <div className="w-full h-2.5 bg-slate-100 rounded-full mb-5 overflow-hidden">
           <div
             className={`h-full rounded-full transition-all duration-500 ${fulfillmentPct >= 100 ? 'bg-success' : 'bg-accent'}`}
             style={{ width: `${fulfillmentPct}%` }}
@@ -106,21 +109,21 @@ export default function RFQPage({ params }: { params: Promise<{ id: string }> })
         {/* Farmer list */}
         <div className="space-y-2 mb-5">
           {selectedListings.map(l => (
-            <div key={l.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-border">
+            <div key={l.id} className="flex items-center justify-between p-3.5 bg-slate-50 rounded-xl border border-border">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-primary-light flex items-center justify-center shrink-0">
                   <Package className="w-4 h-4 text-primary" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-foreground">{l.farmerName}</div>
+                  <div className="text-sm font-bold text-foreground">{l.farmerName}</div>
                   <div className="text-xs text-muted flex items-center gap-1">
-                    <MapPin className="w-3 h-3" />{l.location} · {l.distanceKm}km
+                    <MapPin className="w-3 h-3 text-slate-400" />{l.location} · {l.distanceKm || 45}km
                   </div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-sm font-semibold text-primary">{l.quantityKg.toLocaleString()} kg</div>
-                <div className="text-xs text-muted">₹{l.pricePerKg}/kg</div>
+                <div className="text-sm font-extrabold text-primary">{l.quantityKg.toLocaleString()} {t.kg}</div>
+                <div className="text-xs text-muted">₹{l.pricePerKg} {t.perKg}</div>
               </div>
             </div>
           ))}
@@ -135,16 +138,16 @@ export default function RFQPage({ params }: { params: Promise<{ id: string }> })
         {/* Footer */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-border">
           <div>
-            <div className="text-sm font-medium text-foreground">
-              Aggregated: {currentAggregated.toLocaleString()} / {rfq.quantityKg.toLocaleString()} kg
+            <div className="text-sm font-bold text-foreground">
+              {t.available}: {currentAggregated.toLocaleString()} / {rfq.quantityKg.toLocaleString()} {t.kg}
             </div>
             {shortfall > 0 ? (
-              <div className="text-xs text-accent flex items-center gap-1 mt-0.5">
-                <AlertTriangle className="w-3 h-3" /> Shortfall: {shortfall.toLocaleString()} kg
+              <div className="text-xs text-accent font-bold flex items-center gap-1 mt-0.5">
+                <AlertTriangle className="w-3.5 h-3.5" /> {t.poolShortfall} {shortfall.toLocaleString()} {t.kg} {t.moreToFulfill}
               </div>
             ) : (
-              <div className="text-xs text-success flex items-center gap-1 mt-0.5">
-                <CheckCircle2 className="w-3 h-3" /> Requirement fully met
+              <div className="text-xs text-success font-bold flex items-center gap-1 mt-0.5">
+                <CheckCircle2 className="w-3.5 h-3.5" /> 100% {t.fulfilled}
               </div>
             )}
           </div>
@@ -152,9 +155,9 @@ export default function RFQPage({ params }: { params: Promise<{ id: string }> })
           <button
             onClick={handleConfirmOrder}
             disabled={selectedListings.length === 0}
-            className="btn-primary flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="btn-primary flex items-center gap-2 font-bold rounded-xl py-3 px-5 disabled:opacity-40 disabled:cursor-not-allowed shadow-xs"
           >
-            Confirm & Optimize Route
+            {selectedListings.length > 0 ? t.fulfillAndOrder : t.cannotFulfillYet}
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
